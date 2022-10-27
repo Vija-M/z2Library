@@ -1,5 +1,6 @@
 package vija.accenture.z2Library.model;
 
+import com.sun.istack.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -13,13 +14,18 @@ import javax.validation.constraints.NotEmpty;
 
 @ApiModel(description = "Model of the product data ")
 @Component
-@Data
+//@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode
 
 public class Book {
 
-    @ApiModelProperty(notes = "The unique id of the book")
+    @ApiModelProperty(notes = "The unique id of the book", required = true)
+    @NotNull
     private Long id;
 
     @ApiModelProperty(notes = "Title of the book")
@@ -33,7 +39,6 @@ public class Book {
     @ApiModelProperty(notes = "Genre of the book")
     @NotEmpty
     private Genre genre;
-    //private String genre;
 
     @ApiModelProperty(notes = "Quantity of pages")
     @Min(value = 1, message = DescriptionVariables.PAGES_MIN)
@@ -42,7 +47,6 @@ public class Book {
     @ApiModelProperty(notes = "Type of cover of the book")
     @NotEmpty
    private Cover cover;
-    //private String cover;
 
     @ApiModelProperty(notes = "Location of the book")
     @NotEmpty

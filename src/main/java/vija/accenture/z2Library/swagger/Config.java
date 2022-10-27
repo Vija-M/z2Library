@@ -24,20 +24,20 @@ public class Config {
                 .paths(PathSelectors.ant("/error").negate())
                 .build()
                 .apiInfo(apiInfo());
-        docket.useDefaultResponseMessages(false);
+        docket.useDefaultResponseMessages(true);
         return appendTags(docket);
     }
 
     private Docket appendTags(Docket docket) {
         return docket.tags(
                 new Tag(DescriptionVariables.BOOK,
-                        "Controller used to get, create, update and delete books")
+                        "Used to get, create, update and delete books in my home library.")
         );
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("myLibrary API")
+                .title("Library API")
                 .description("My Home Library API")
                 .version("1.0")
                 .build();
