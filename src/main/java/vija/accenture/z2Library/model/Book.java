@@ -7,25 +7,23 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 import vija.accenture.z2Library.swagger.DescriptionVariables;
 
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-
 @ApiModel(description = "Model of the product data ")
 @Component
-//@Data
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-@ToString
-@EqualsAndHashCode
+
+//@Setter
+//@Getter
+//@ToString
+//@EqualsAndHashCode
 
 public class Book {
 
     @ApiModelProperty(notes = "The unique id of the book", required = true)
-    @NotNull
+   // @NotNull
     private Long id;
 
     @ApiModelProperty(notes = "Title of the book")
@@ -37,7 +35,6 @@ public class Book {
     private String author;
 
     @ApiModelProperty(notes = "Genre of the book")
-    @NotEmpty
     private Genre genre;
 
     @ApiModelProperty(notes = "Quantity of pages")
@@ -45,11 +42,20 @@ public class Book {
     private int pages;
 
     @ApiModelProperty(notes = "Type of cover of the book")
-    @NotEmpty
-   private Cover cover;
+    private Cover cover;
 
     @ApiModelProperty(notes = "Location of the book")
     @NotEmpty
     private String shelf;
+
+    public Book(Long id, String title, String author, Genre genre, int pages, Cover cover, String shelf) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.cover = cover;
+        this.shelf = shelf;
+    }
 
 }
