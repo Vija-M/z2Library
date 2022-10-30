@@ -56,8 +56,8 @@ public class BookController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The server has not found anything matching the Request-URI"),
             @ApiResponse(code = 500, message = "Server error")})
-    public ResponseEntity<Book> getProductById(@ApiParam(value = "book ID", required = true)
-                                                         @NonNull @PathVariable Long id) {
+    public ResponseEntity<Book> getBookById(@ApiParam(value = "book ID", required = true)
+                                            @NonNull @PathVariable Long id) {
         log.info("Get book by passing ID, where book ID is :{} ", id);
         Optional<Book> book = (bookService.getBookById(id));
         if (!book.isPresent()) {
@@ -103,7 +103,7 @@ public class BookController {
             @ApiResponse(code = 500, message = "Server error")})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteBookById(@ApiParam(value = "The id of the book", required = true)
-                                                   @NonNull @PathVariable Long id) {
+                                               @NonNull @PathVariable Long id) {
         log.info("Delete book by passing ID, where ID is:{}", id);
         Optional<Book> product = bookService.getBookById(id);
         if (!(product.isPresent())) {
@@ -115,7 +115,8 @@ public class BookController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/put/{id}")
+
     @ApiOperation(value = "Updates the book by id",
             notes = "Updates the book if provided id exists",
             response = Book.class)
@@ -128,8 +129,8 @@ public class BookController {
             @ApiResponse(code = 500, message = "Server error")})
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Book> updateBookById(@ApiParam(value = "id of the book", required = true)
-                                                       @NonNull @PathVariable Long id,
-                                                       @Valid @RequestBody Book book, BindingResult bindingResult)  {
+                                               @NonNull @PathVariable Long id,
+                                               @Valid @RequestBody Book book, BindingResult bindingResult) {
         log.info("Update existing book with ID: {} and new body: {}", id, book);
         if (bindingResult.hasErrors() || !id.equals(book.getId())) {
             log.warn("Book for update with id {} not found", id);

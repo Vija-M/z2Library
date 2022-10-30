@@ -1,7 +1,7 @@
 package vija.accenture.z2Library.repository.model;
 
 import lombok.*;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.ColumnTransformer;
 import org.springframework.stereotype.Component;
 import vija.accenture.z2Library.model.Cover;
 import vija.accenture.z2Library.model.Genre;
@@ -9,21 +9,21 @@ import vija.accenture.z2Library.model.Genre;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//@Data
+//@EqualsAndHashCode
+@Data
 @Component
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@ToString
-//@EqualsAndHashCode
+
+//@Getter
+//@Setter
+//@ToString
 
 @Entity
-@Table(name = "books")
+@Table(name = "myBook")
 public class BookDAO {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "title", length = 50, nullable = false)
@@ -34,19 +34,30 @@ public class BookDAO {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genre", length = 25)
+    @ColumnTransformer(read = "UPPER(genre)", write = "LOWER(?)")
     private Genre genre;
     //  private String genre;
-
 
     @Column(name = "pages", length = 4)
     private int pages;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cover", length = 15)
+    @ColumnTransformer(read = "UPPER(cover)", write = "LOWER(?)")
     private Cover cover;
     //private String cover;
 
     @Column(name = "shelf", length = 5, nullable = false)
     private String shelf;
+
+    public BookDAO(Long id, String title, String author, Genre genre, int pages, Cover cover, String shelf) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.cover = cover;
+        this.shelf = shelf;
+    }
 }
 
