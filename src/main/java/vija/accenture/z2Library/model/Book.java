@@ -1,6 +1,6 @@
 package vija.accenture.z2Library.model;
 
-import com.sun.istack.NotNull;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -9,20 +9,17 @@ import vija.accenture.z2Library.swagger.DescriptionVariables;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@ApiModel(description = "Model of the product data ")
+@ApiModel(description = "Model of the book")
 @Component
 @Data
 @NoArgsConstructor
-
-//@Setter
-//@Getter
-//@ToString
-//@EqualsAndHashCode
+@EqualsAndHashCode
 
 public class Book {
 
-    @ApiModelProperty(notes = "The unique id of the book", required = true)
+    @ApiModelProperty(notes = "The unique id of the book", required = true, example = "1", hidden = false)
    // @NotNull
     private Long id;
 
@@ -47,15 +44,5 @@ public class Book {
     @ApiModelProperty(notes = "Location of the book")
     @NotEmpty
     private String shelf;
-
-    public Book(Long id, String title, String author, Genre genre, int pages, Cover cover, String shelf) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.pages = pages;
-        this.cover = cover;
-        this.shelf = shelf;
-    }
 
 }

@@ -17,5 +17,6 @@ public class HTMLResponseMessages {
             "with already existent data";
     public static final String HTTP_500 = "Unsuccessful request responds with this code. Internal server error. " +
             "Check the response headers for information";
+
 }
 

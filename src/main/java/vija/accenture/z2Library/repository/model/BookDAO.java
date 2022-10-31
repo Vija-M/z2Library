@@ -7,23 +7,20 @@ import vija.accenture.z2Library.model.Cover;
 import vija.accenture.z2Library.model.Genre;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 //@EqualsAndHashCode
 @Data
 @Component
 @NoArgsConstructor
-
 //@Getter
 //@Setter
 //@ToString
-
 @Entity
 @Table(name = "myBook")
 public class BookDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "title", length = 50, nullable = false)
@@ -36,7 +33,6 @@ public class BookDAO {
     @Column(name = "genre", length = 25)
     @ColumnTransformer(read = "UPPER(genre)", write = "LOWER(?)")
     private Genre genre;
-    //  private String genre;
 
     @Column(name = "pages", length = 4)
     private int pages;
@@ -45,13 +41,22 @@ public class BookDAO {
     @Column(name = "cover", length = 15)
     @ColumnTransformer(read = "UPPER(cover)", write = "LOWER(?)")
     private Cover cover;
-    //private String cover;
 
     @Column(name = "shelf", length = 5, nullable = false)
     private String shelf;
 
     public BookDAO(Long id, String title, String author, Genre genre, int pages, Cover cover, String shelf) {
         this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.cover = cover;
+        this.shelf = shelf;
+    }
+
+    public BookDAO(String title, String author, Genre genre, int pages, Cover cover, String shelf) {
+
         this.title = title;
         this.author = author;
         this.genre = genre;

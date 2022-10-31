@@ -14,11 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
 import vija.accenture.z2Library.mappers.BookMapStructMapper;
-import vija.accenture.z2Library.model.Book;
-import vija.accenture.z2Library.model.Cover;
 import vija.accenture.z2Library.model.Genre;
 import vija.accenture.z2Library.repository.BookRepository;
 import vija.accenture.z2Library.repository.model.BookDAO;
+import vija.accenture.z2Library.model.Book;
+import vija.accenture.z2Library.model.Cover;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,12 +58,12 @@ class BookServiceImplementationTest {
         }
 
         @Test
-        public void getALlBooksSuccess() {
+         void getALlBooksSuccess() {
             when(bookRepository.findAll()).thenReturn(bookDAOList);
             when(bookMapper.bookDAOToBook(bookDAO)).thenReturn(book);
             List<Book> bookList = bookServiceImpl.getAllBooks();
             assertEquals(2, bookList.size());
-            assertEquals(bookList.get(0).getTitle(), "title");
+            assertEquals("title", bookList.get(0).getTitle());
         }
 
         @Test

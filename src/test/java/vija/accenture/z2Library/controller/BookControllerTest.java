@@ -11,10 +11,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import vija.accenture.z2Library.service.impl.BookServiceImplementation;
 import vija.accenture.z2Library.model.Book;
 import vija.accenture.z2Library.model.Cover;
 import vija.accenture.z2Library.model.Genre;
-import vija.accenture.z2Library.service.impl.BookServiceImplementation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +62,7 @@ class BookControllerTest {
     }
 
     @Test
-    public void getBookById() throws Exception {
+     void getBookById() throws Exception {
         when(serviceImpl.getBookById(anyLong())).thenReturn(Optional.of(testBook()));
         mockMvc.perform(MockMvcRequestBuilders.get(URL + "/" + anyLong())
                         .contentType(MediaType.APPLICATION_JSON))
@@ -111,7 +111,7 @@ class BookControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-  /*  @Test
+   @Test
     void updateBookByIdSuccess() throws Exception {
         Book book = testBook();
         when(serviceImpl.getBookById(book.getId())).thenReturn(Optional.of(book));
@@ -120,11 +120,11 @@ class BookControllerTest {
                         .content(asJsonString(book))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1L))
-                .andExpect(status().isCreated());
+               .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1L));
+       //         .andExpect(status().isCreated())
         verify(serviceImpl, times(1)).saveBook(book);
     }
-*/
+
     @Test
     void UpdateBookByIdUnsuccessful() throws Exception {
         Book book = testBook();
@@ -188,7 +188,7 @@ class BookControllerTest {
         book.setAuthor("O.Mao");
         book.setCover(Cover.HARD);
         book.setGenre(Genre.HISTORICAL_FICTION);
-        book.setPages(235);
+        book.setPages(1);
         book.setShelf("C2F");
         return book;
     }
