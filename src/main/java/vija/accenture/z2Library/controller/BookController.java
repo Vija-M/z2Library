@@ -91,6 +91,7 @@ public class BookController {
         return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
     }
 
+
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deletes the book by id",
             notes = "Deletes the book if provided id exists",
